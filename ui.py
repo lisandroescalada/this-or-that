@@ -13,7 +13,7 @@ def dibujar_imagen(pantalla, path: str, resolucion: tuple, posicion: tuple) -> N
     imagen_escala = pygame.transform.scale(imagen, resolucion)
     pantalla.blit(imagen_escala, posicion)
 
-def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int) -> None:
+def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int, tiempo_restante : int) -> None:
     pantalla.fill(AZUL)
     dibujar_imagen(pantalla, "Img\\cuadro.jpg", (500, 500), (50, 0))
     dibujar_texto(pantalla, fuente, pregunta["pregunta"], NEGRO, (130, 160))
@@ -32,6 +32,7 @@ def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int) -> None:
     dibujar_imagen(pantalla, "Img\\voto_neutro.jpg", (400, 400), (100, 195))
     dibujar_imagen(pantalla, "Img\\voto_neutro.jpg", (400, 400), (200, 195))
     dibujar_imagen(pantalla, "Img\\voto_neutro.jpg", (400, 400), (300, 195))
+    dibujar_texto(pantalla, fuente, f"Tiempo restante: {tiempo_restante} segundos", BLANCO, (50, 50))
 
     # dibujar_imagen(pantalla, "Img\\next.jpg", (250, 250), (5, 355))
     # dibujar_imagen(pantalla, "Img\\half.jpg", (250, 250), (105, 355))
@@ -44,6 +45,10 @@ def dibujar_final(pantalla, fuente, puntaje: int) -> None:
 def dibujar_boton(pantalla, fuente):
     dibujar_imagen(pantalla, "Img\\boton_siguiente.jpg", (250, 250), (430, 355))
     dibujar_texto(pantalla, fuente, "Seguir", BLANCO, (466, 532))
+
+def dibujar_comodin(pantalla):
+    dibujar_imagen(pantalla, "Img\\next.jpg", (250, 250), (5, 355))
+    # dibujar_texto(pantalla, fuente, "", BLANCO, (136, 532))
 
 def votantes_eleccion(pantalla, lista_votos: list) -> None:
     dibujar_imagen(pantalla, lista_votos[0], (400, 400), (-100, 195))

@@ -1,4 +1,6 @@
 import random
+import time
+from ui import dibujar_final
 
 def validar_eleccion(x: int, y: int) -> str|None:
     if x >= 135 and x <= 270 and y >= 215 and y <= 280:
@@ -44,3 +46,10 @@ def obtener_respuesta_correcta(primera_opcion: int, segunda_opcion: int) -> str:
 
 def siguiente_nivel(x: int, y: int) -> bool:
     return x >= 445 and x <= 580 and y >= 515 and y <= 575
+
+def comodin_next(x: int, y: int) -> bool:
+    return x >= 5 and x <= 255 and y >= 355 and y <= 605
+    
+    
+    
+
