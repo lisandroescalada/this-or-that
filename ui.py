@@ -13,7 +13,7 @@ def dibujar_imagen(pantalla, path: str, resolucion: tuple, posicion: tuple) -> N
     imagen_escala = pygame.transform.scale(imagen, resolucion)
     pantalla.blit(imagen_escala, posicion)
 
-def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int) -> None:
+def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int, tiempo_restante) -> None:
     pantalla.fill(AZUL)
     dibujar_imagen(pantalla, "Img\\cuadro.jpg", (500, 500), (50, 0))
     dibujar_texto(pantalla, fuente, pregunta["pregunta"], NEGRO, (130, 160))
@@ -33,21 +33,24 @@ def dibujar_preguntas(pantalla, fuente, pregunta: dict, puntaje: int) -> None:
     dibujar_imagen(pantalla, "Img\\voto_neutro.jpg", (400, 400), (200, 195))
     dibujar_imagen(pantalla, "Img\\voto_neutro.jpg", (400, 400), (300, 195))
 
-    # dibujar_imagen(pantalla, "Img\\next.jpg", (250, 250), (5, 355))
-    # dibujar_imagen(pantalla, "Img\\half.jpg", (250, 250), (105, 355))
-    # dibujar_imagen(pantalla, "Img\\reload.jpg", (250, 250), (205, 355))
+    dibujar_imagen(pantalla, "Img\\next.jpg", (250, 250), (5, 355))
+    dibujar_imagen(pantalla, "Img\\half.jpg", (250, 250), (105, 355))
+    dibujar_imagen(pantalla, "Img\\reload.jpg", (250, 250), (205, 355))
 
-def dibujar_final(pantalla, fuente, puntaje: int) -> None:
-    pantalla.fill(NEGRO)
-    dibujar_texto(pantalla, fuente, f"FIN DEL JUEGO. Puntaje: {puntaje}", BLANCO, (100, 200))
+    dibujar_texto(pantalla, fuente, f"{tiempo_restante:.0f}", BLANCO, (285, 50))
 
-def dibujar_boton(pantalla, fuente):
+def dibujar_boton(pantalla, fuente, texto: str) -> None:
     dibujar_imagen(pantalla, "Img\\boton_siguiente.jpg", (250, 250), (430, 355))
-    dibujar_texto(pantalla, fuente, "Seguir", BLANCO, (466, 532))
+    dibujar_texto(pantalla, fuente, texto, BLANCO, (466, 532))
 
-def votantes_eleccion(pantalla, lista_votos: list) -> None:
+def votantes_eleccion(pantalla, lista_votos: list, todos = True) -> None:
     dibujar_imagen(pantalla, lista_votos[0], (400, 400), (-100, 195))
     dibujar_imagen(pantalla, lista_votos[1], (400, 400), (0, 195))
-    dibujar_imagen(pantalla, lista_votos[2], (400, 400), (100, 195))
-    dibujar_imagen(pantalla, lista_votos[3], (400, 400), (200, 195))
-    dibujar_imagen(pantalla, lista_votos[4], (400, 400), (300, 195))
+    if todos:
+        dibujar_imagen(pantalla, lista_votos[2], (400, 400), (100, 195))
+        dibujar_imagen(pantalla, lista_votos[3], (400, 400), (200, 195))
+        dibujar_imagen(pantalla, lista_votos[4], (400, 400), (300, 195))
+
+def mostrar_dos_votos(pantalla, lista_votos: list) -> None:
+    dibujar_imagen(pantalla, lista_votos[0], (400, 400), (-100, 195))
+    dibujar_imagen(pantalla, lista_votos[1], (400, 400), (0, 195))

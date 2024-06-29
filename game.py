@@ -1,5 +1,16 @@
 import random
 
+pantalla_preguntas = True
+puntaje = 0
+indice_pregunta = 0
+
+next = True
+half = True
+reload = True
+
+siguiente = False
+reiniciar = False
+
 def validar_eleccion(x: int, y: int) -> str|None:
     if x >= 135 and x <= 270 and y >= 215 and y <= 280:
         jugador_eleccion = "Rojo"
@@ -12,6 +23,17 @@ def validar_eleccion(x: int, y: int) -> str|None:
 
 def validar_eleccion_correcta(jugador_eleccion: str, eleccion_correcta: str) -> bool:
     return jugador_eleccion == eleccion_correcta
+
+def validar_comodines(x: int, y: int) -> str|None:
+    if x >= 20 and x <= 90 and y >= 520 and y <= 580:
+        comodin_eleccion = "Next"
+    elif x >= 120 and x <= 190 and y >= 520 and y <= 580:
+        comodin_eleccion = "Half"
+    elif x >= 220 and x <= 290 and y >= 520 and y <= 580:
+        comodin_eleccion = "Reload"
+    else:
+        comodin_eleccion = None
+    return comodin_eleccion
 
 def obtener_votos() -> list:
     lista_votos = []
@@ -42,5 +64,5 @@ def obtener_respuesta_correcta(primera_opcion: int, segunda_opcion: int) -> str:
 
     return respuesa_correcta
 
-def siguiente_nivel(x: int, y: int) -> bool:
+def oprimir_boton(x: int, y: int) -> bool:
     return x >= 445 and x <= 580 and y >= 515 and y <= 575
