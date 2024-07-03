@@ -1,97 +1,95 @@
-from ui import *
-from game import *
-from data import preguntas
+from Modules.manejo_datos import *
+from Modules.juego_logica import *
+from Modules.visuales import *
 import time
 
 pygame.init()
 
-fuente = pygame.font.Font("Font\\PixelifySans.ttf", 30)
-pantalla = pygame.display.set_mode((600, 600))
+pantalla = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("¿Esto o Aquello?")
+fuente = pygame.font.Font("Font\\Minecraft.ttf", 28)
+preguntas = cargar_preguntas("Data\\preguntas.json")
+juego = Juego()
 
 tiempo_inicio = time.time()
 tiempo_maximo = 15
 
 correr = True
 while correr:
-    tiempo_restante = tiempo_maximo - (time.time() - tiempo_inicio)
-    if tiempo_restante <= 0:
-        dibujar_boton(pantalla, fuente, "Volver")
-        pantalla_preguntas = False
-        reiniciar = True
-
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             correr = False
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             x, y = evento.pos
 
-            if pantalla_preguntas:
-                jugador_eleccion = validar_eleccion(x, y)
-                comodin_eleccion = validar_comodines(x, y)
+            if juego.inicio:
+                juego.presionar_inicio(x, y)
 
-                lista_votos = obtener_votos()
-                primera_opcion, segunda_opcion = obtener_cantidad_votos(lista_votos)
-                eleccion_correcta = obtener_respuesta_correcta(primera_opcion, segunda_opcion)
+            elif juego.preguntas:
+                jugador_eleccion = juego.presionar_opciones(x, y)
+                comodin_eleccion = juego.presionar_comodines(x, y)
 
-                siguiente = False
-                reiniciar = False
+                juego.obtener_votos()
+                juego.obtener_cantidad_votos()
+                eleccion_correcta = juego.obtener_respuesta_correcta()
 
                 if jugador_eleccion:
-                    pantalla_preguntas = False
-                    if validar_eleccion_correcta(jugador_eleccion, eleccion_correcta):
-                        votantes_eleccion(pantalla, lista_votos)
-                        dibujar_boton(pantalla, fuente, "Seguir")
-                        siguiente = True
+                    juego.preguntas = False
+                    juego.tiempo = False
+                    if juego.validar_eleccion(jugador_eleccion, eleccion_correcta):
+                        pintar_votantes(pantalla, juego.votantes)
+                        dibujar_boton(pantalla, fuente, "SEGUIR", (300, 300), (300, 30), (345, 255))
+                        juego.siguiente = True
                     else:
-                        votantes_eleccion(pantalla, lista_votos)
-                        dibujar_boton(pantalla, fuente, "Volver")
-                        reiniciar = True
+                        pintar_votantes(pantalla, juego.votantes)
+                        dibujar_boton(pantalla, fuente, "VOLVER", (300, 300), (300, 30), (340, 255))
+                        juego.reiniciar = True
 
-                if comodin_eleccion:
-                    if comodin_eleccion == "Next" and next:
-                        votantes_eleccion(pantalla, lista_votos)
-                        pantalla_preguntas = False
-                        dibujar_boton(pantalla, fuente, "Seguir")
-                        siguiente = True
-                        next = False
+                elif comodin_eleccion:
+                    if juego.comodines_usados[comodin_eleccion] == 1:
+                        juego.comodines_usados[comodin_eleccion] = 0
+                        if comodin_eleccion == "Next":
+                            juego.preguntas = False
+                            juego.tiempo = False
+                            pintar_votantes(pantalla, juego.votantes)
+                            dibujar_boton(pantalla, fuente, "SEGUIR", (300, 300), (300, 30), (345, 255))
+                            juego.siguiente = True
+                        elif comodin_eleccion == "Half":
+                            pass
+                        elif comodin_eleccion == "Reload":
+                            juego.pregunta_actual += 1
 
-                    elif comodin_eleccion == "Half" and half:
-                        pantalla_preguntas = False
-                        votantes_eleccion(pantalla, lista_votos, False)
-                        half = False
-
-                    elif comodin_eleccion == "Reload" and reload:
-                        indice_pregunta += 1
-                        reload = False
-
-                    comodin_eleccion = None
-
-            if siguiente:
-                if oprimir_boton(x, y):
+            elif juego.siguiente:
+                if juego.presionar_boton(x, y):
                     tiempo_inicio = time.time()
-                    indice_pregunta += 1
-                    puntaje += 1
-                    pantalla_preguntas = True
+                    juego.pregunta_actual += 1
+                    juego.puntuacion += 1
+                    juego.siguiente = False
+                    juego.preguntas = True
+                    juego.tiempo = True
 
-            elif reiniciar:
-                if oprimir_boton(x, y):
+            elif juego.reiniciar:
+                if juego.presionar_boton(x, y):
                     tiempo_inicio = time.time()
-                    indice_pregunta = 0
-                    puntaje = 0
-                    next = True
-                    reload = True
-                    half = True
-                    pantalla_preguntas = True
+                    juego.pregunta_actual = 0
+                    juego.puntuacion = 0
+                    for comodin in juego.comodines_usados.keys():
+                        juego.comodines_usados[comodin] = 1
+                    juego.reiniciar = False
+                    juego.inicio = True
 
-    if pantalla_preguntas:
-        if indice_pregunta < len(preguntas):
-            dibujar_preguntas(pantalla, fuente, preguntas[indice_pregunta], puntaje, tiempo_restante)
-        else:
-            # pantalla.fill(NEGRO)
-            pantalla_preguntas = False
-            siguiente = False
-            reiniciar = False
+    if juego.tiempo:
+        tiempo_restante = tiempo_maximo - (time.time() - tiempo_inicio)
+        if tiempo_restante <= 0:
+            juego.preguntas = False
+            dibujar_boton(pantalla, fuente, "VOLVER", (300, 300), (300, 30), (340, 255))
+            juego.reiniciar = True
+
+    if juego.inicio:
+        dibujar_inicio(pantalla, fuente)
+    elif juego.preguntas:
+        if juego.pregunta_actual < len(preguntas):
+            dibujar_preguntas(pantalla, fuente, preguntas[juego.pregunta_actual], juego.puntuacion, juego.comodines_usados, tiempo_restante)
 
     pygame.display.update()
 

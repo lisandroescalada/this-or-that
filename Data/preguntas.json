@@ -1,0 +1,18 @@
+[
+    {
+        "pregunta": "¿A cuál personaje prefieres?",
+        "opciones": ["Goku", "Naruto"]
+    },
+    {
+        "pregunta": "¿Qué prefieres beber?",
+        "opciones": ["Café", "Té"]
+    },
+    {
+        "pregunta": "¿Cuál es tu estación favorita?",
+        "opciones": ["Verano", "Invierno"]
+    },
+    {
+        "pregunta": "¿Qué tipo de música prefieres?",
+        "opciones": ["Rock", "Pop"]
+    }
+]
