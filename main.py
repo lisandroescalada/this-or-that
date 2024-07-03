@@ -14,6 +14,14 @@ juego = Juego()
 tiempo_inicio = time.time()
 tiempo_maximo = 15
 
+#sonidos
+pygame.mixer.music.load('audio/musica.mp3')
+pygame.mixer.music.play()
+
+moneda = pygame.mixer.Sound('audio/moneda.mp3')
+game_over = pygame.mixer.Sound('audio/game_over.mp3')
+
+
 correr = True
 while correr:
     for evento in pygame.event.get():
@@ -41,6 +49,8 @@ while correr:
                         dibujar_boton(pantalla, fuente, "SEGUIR", (300, 300), (300, 30), (345, 255))
                         juego.siguiente = True
                     else:
+                        pygame.mixer.music.stop()
+                        game_over.play()
                         pintar_votantes(pantalla, juego.votantes)
                         dibujar_boton(pantalla, fuente, "VOLVER", (300, 300), (300, 30), (340, 255))
                         juego.reiniciar = True
@@ -64,12 +74,19 @@ while correr:
                     tiempo_inicio = time.time()
                     juego.pregunta_actual += 1
                     juego.puntuacion += 1
+                    if juego.puntuacion:
+                        moneda.play()
                     juego.siguiente = False
                     juego.preguntas = True
                     juego.tiempo = True
 
             elif juego.reiniciar:
+                # pygame.mixer.music.stop()
+                # game_over.play()
                 if juego.presionar_boton(x, y):
+                    tiempo_inicio = time.time()
+                    game_over.stop()
+                    pygame.mixer.music.play()
                     tiempo_inicio = time.time()
                     juego.pregunta_actual = 0
                     juego.puntuacion = 0

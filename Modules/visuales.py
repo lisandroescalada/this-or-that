@@ -15,6 +15,8 @@ IMG_RELOAD = "Images/reload.png"
 IMG_VOTO_NEUTRO = "Images/voto_neutro.png"
 IMG_MONEDA = "Images/moneda.png"
 
+# imagenes_votantes = [["Img\\voto_neutro.jpg", "Img\\voto_neutro.jpg", "Img\\voto_neutro.jpg", "Img\\voto_neutro.jpg", "Img\\voto_neutro.jpg"]]
+
 def dibujar_imagen(pantalla, path: str, resolucion: tuple, posicion: tuple) -> None:
     imagen = pygame.image.load(path)
     imagen_escala = pygame.transform.scale(imagen, resolucion)
