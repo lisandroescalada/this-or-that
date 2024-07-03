@@ -12,38 +12,37 @@ class Juego:
         self.cantidad_opcion_uno = 0
         self.cantidad_opcion_dos = 0
 
-        self.puntuacion = 0
         self.pregunta_actual = 0
         self.comodines_usados = {"Next": 1, "Half": 1, "Reload": 1}
 
     def presionar_inicio(self, x: int, y: int) -> None:
-        if x >= 318 and x <= 480 and y >= 480 and y <= 555:
+        if x >= 218 and x <= 380 and y >= 485 and y <= 565:
             self.inicio = False
             self.preguntas = True
             self.tiempo = True
 
     def presionar_opciones(self, x: int, y: int) -> str|None:
-        if x >= 190 and x <= 380 and y >= 200 and y <= 290:
+        if x >= 190 and x <= 380 and y >= 220 and y <= 310:
             jugador_eleccion = "Rojo"
-        elif x >= 420 and x <= 610 and y >= 200 and y <= 290:
+        elif x >= 420 and x <= 610 and y >= 220 and y <= 310:
             jugador_eleccion = "Azul"
         else:
             jugador_eleccion = None
         return jugador_eleccion
-    
+
     def presionar_comodines(self, x: int, y: int) -> str|None:
-        if x >= 190 and x <= 250 and y >= 320 and y <= 380:
+        if x >= 190 and x <= 250 and y >= 340 and y <= 400:
             comodin_eleccion = "Next"
-        elif x >= 290 and x <= 350 and y >= 320 and y <= 380:
+        elif x >= 290 and x <= 350 and y >= 340 and y <= 400:
             comodin_eleccion = "Half"
-        elif x >= 390 and x <= 450 and y >= 320 and y <= 380:
+        elif x >= 390 and x <= 450 and y >= 340 and y <= 400:
             comodin_eleccion = "Reload"
         else:
-            comodin_eleccion = False
+            comodin_eleccion = None
         return comodin_eleccion
-    
+
     def presionar_boton(self, x: int, y: int) -> bool:
-        return x >= 315 and x <= 480 and y >= 220 and y <= 295
+        return x >= 318 and x <= 480 and y >= 225 and y <= 300
 
     def validar_eleccion(self, jugador_eleccion: str, eleccion_correcta: str) -> bool:
         return jugador_eleccion == eleccion_correcta
