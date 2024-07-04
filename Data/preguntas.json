@@ -1,18 +1,22 @@
 [
     {
-        "pregunta": "A cual personaje prefieres?",
+        "pregunta": "¿A cuál personaje prefieres?",
         "opciones": ["Goku", "Naruto"]
     },
     {
-        "pregunta": "Que prefieres beber?",
-        "opciones": ["Cafe", "Te"]
+        "pregunta": "¿Qué bebida prefieres?",
+        "opciones": ["Café", "Té"]
     },
     {
-        "pregunta": "Cual es tu estacion favorita?",
-        "opciones": ["Verano", "Invierno"]
+        "pregunta": "¿Qué mascota prefieres?",
+        "opciones": ["Perro", "Gato"]
     },
     {
-        "pregunta": "Que tipo de musica prefieres?",
-        "opciones": ["Rock", "Pop"]
+        "pregunta": "¿Qué prefieres leer?",
+        "opciones": ["Libros", "Revistas"]
+    },
+    {
+        "pregunta": "¿Qué fruta prefieres?",
+        "opciones": ["Manzana", "Naranja"]
     }
 ]
