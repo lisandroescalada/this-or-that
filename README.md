@@ -48,7 +48,7 @@ Esto_o_Aquello/
 # Instrucciones del Juego
 1. Pantalla de Inicio:
    - Al iniciar el juego, se muestra la pantalla de inicio. Haz clic en el botón "INICIO" para comenzar.
-   - ![Pantalla de Inicio](rassets/images/inicio.png)
+   - ![Pantalla de Inicio](assets/images/inicio.png)
 
 2. Ingresar Nombre:
    - Ingresa tu nombre utilizando el teclado y presiona "SEGUIR" para continuar.
