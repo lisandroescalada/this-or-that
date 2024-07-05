@@ -1,5 +1,5 @@
-import pygame
 import json
+import pygame
 
 def cargar_preguntas(path: str) -> list[dict]:
     """
@@ -42,7 +42,8 @@ def cargar_sonido(path: str, volumen: float) -> pygame.mixer.Sound:
     sonido.set_volume(volumen)
     return sonido
 
-def dibujar_imagen(pantalla: pygame.Surface, path: str, resolucion: tuple[int, int], posicion: tuple[int, int]) -> None:
+def dibujar_imagen(pantalla: pygame.Surface, path: str, resolucion: tuple[int, int], 
+                   posicion: tuple[int, int]) -> None:
     """
     Carga una imagen desde la ruta especificada, la escala a la resolución deseada y la dibuja en la pantalla.
 
@@ -56,7 +57,8 @@ def dibujar_imagen(pantalla: pygame.Surface, path: str, resolucion: tuple[int, i
     imagen_escala = pygame.transform.scale(imagen, resolucion)
     pantalla.blit(imagen_escala, posicion)
 
-def dibujar_texto(pantalla: pygame.Surface, fuente: pygame.font.Font, texto: str, color: tuple[int, int, int], posicion: tuple[int, int]) -> None:
+def dibujar_texto(pantalla: pygame.Surface, fuente: pygame.font.Font, texto: str, 
+                  color: tuple[int, int, int], posicion: tuple[int, int]) -> None:
     """
     Renderiza y dibuja texto en la superficie especificada.
 

@@ -1,24 +1,24 @@
 import pygame
 from modules.utilidades import dibujar_imagen, dibujar_texto
 
-CREMA = (250, 245, 213)
-AZUL = (50, 130, 200)
 NEGRO = (0, 0, 0)
+AZUL = (50, 130, 200)
+CREMA = (250, 245, 213)
 
-TITULO = "assets/images/titulo.png"
-CUADRO = "assets/images/cuadro.png"
-BOTON = "assets/images/boton.png"
-BOTON_ROJO = "assets/images/boton_rojo.png"
-BOTON_AZUL = "assets/images/boton_azul.png"
 NEXT = "assets/images/next.png"
 HALF = "assets/images/half.png"
+BARRA = "assets/images/barra.png"
+BOTON = "assets/images/boton.png"
+TITULO = "assets/images/titulo.png"
+CUADRO = "assets/images/cuadro.png"
 RELOAD = "assets/images/reload.png"
-VOTO_NEUTRO = "assets/images/voto_neutro.png"
+MONEDA = "assets/images/moneda.png"
 VOTO_ROJO = "assets/images/voto_rojo.png"
 VOTO_AZUL = "assets/images/voto_azul.png"
-MONEDA = "assets/images/moneda.png"
-BARRA = "assets/images/barra.png"
 MINI_BOTON = "assets/images/mini_boton.png"
+BOTON_ROJO = "assets/images/boton_rojo.png"
+BOTON_AZUL = "assets/images/boton_azul.png"
+VOTO_NEUTRO = "assets/images/voto_neutro.png"
 
 def dibujar_inicio(pantalla: pygame.Surface, fuente: pygame.font.Font) -> None:
     """
@@ -136,7 +136,8 @@ def pintar_votantes(pantalla: pygame.Surface, votantes: list) -> None:
                 dibujar_imagen(pantalla, voto, (275, 275), posicion)
                 voto_index += 1
 
-def dibujar_final(pantalla: pygame.Surface, fuente: pygame.font.Font, nombre: str, puntaje: int, votantes: list) -> None:
+def dibujar_final(pantalla: pygame.Surface, fuente: pygame.font.Font, 
+                  nombre: str, puntaje: int, votantes: list) -> None:
     """
     Dibuja la pantalla final del juego con el nombre, puntaje y votantes.
     
@@ -167,3 +168,20 @@ def dibujar_tiempo(pantalla: pygame.Surface, fuente: pygame.font.Font, tiempo_re
     dibujar_imagen(pantalla, MINI_BOTON, (400, 400), (-145, -144))
     tiempo_formateado = f"{tiempo_restante:02.0f}"
     dibujar_texto(pantalla, fuente, tiempo_formateado, CREMA, (43, 40))
+
+def pintar_dos_votantes(pantalla: pygame.Surface, votantes: list) -> None:
+    """
+    Dibuja dos votantes y tres imágenes de voto neutral en la pantalla.
+
+    Args:
+        pantalla (pygame.Surface): La superficie de Pygame donde se dibujarán las imágenes.
+        votantes (list): Una lista de dos elementos que representan las imágenes de los votantes a dibujar.
+    
+    Returns:
+        None
+    """
+    dibujar_imagen(pantalla, votantes[0], (275, 275), (19, -130))
+    dibujar_imagen(pantalla, votantes[1], (275, 275), (140.25, -130))
+    dibujar_imagen(pantalla, VOTO_NEUTRO, (275, 275), (261.5, -130))
+    dibujar_imagen(pantalla, VOTO_NEUTRO, (275, 275), (382.75, -130))
+    dibujar_imagen(pantalla, VOTO_NEUTRO, (275, 275), (504, -130))

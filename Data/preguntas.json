@@ -1,22 +1,42 @@
 [
     {
-        "pregunta": "¿A cuál personaje prefieres?",
-        "opciones": ["Goku", "Naruto"]
+        "pregunta": "¿Prefieres siempre tener...?",
+        "opciones": ["Tos", "Hipo"]
     },
     {
-        "pregunta": "¿Qué bebida prefieres?",
-        "opciones": ["Café", "Té"]
+        "pregunta": "¿Prefieres solo ver...?",
+        "opciones": ["MARVEL", "DC"]
     },
     {
-        "pregunta": "¿Qué mascota prefieres?",
-        "opciones": ["Perro", "Gato"]
+        "pregunta": "¿Prefieres ser...?",
+        "opciones": ["Rico", "Famoso"]
     },
     {
-        "pregunta": "¿Qué prefieres leer?",
-        "opciones": ["Libros", "Revistas"]
+        "pregunta": "¿Prefieres vivir en...?",
+        "opciones": ["Invierno", "Verano"]
     },
     {
-        "pregunta": "¿Qué fruta prefieres?",
-        "opciones": ["Manzana", "Naranja"]
+        "pregunta": "¿Prefieres solo comer...?",
+        "opciones": ["Tacos", "Pizza"]
+    },
+    {
+        "pregunta": "¿Prefieres tener una...?",
+        "opciones": ["Tarántula", "Serpiente"]
+    },
+    {
+        "pregunta": "¿Prefieres solo ver...?",
+        "opciones": ["Películas", "Series"]
+    },
+    {
+        "pregunta": "¿Prefieres nunca...?",
+        "opciones": ["Dormir", "Comer"]
+    },
+    {
+        "pregunta": "¿Prefieres ser siempre...?",
+        "opciones": ["Temido", "Subestimado"]
+    },
+    {
+        "pregunta": "¿Prefieres hablar con...?",
+        "opciones": ["Aliens", "Espíritus"]
     }
 ]

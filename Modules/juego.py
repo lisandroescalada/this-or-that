@@ -1,10 +1,11 @@
+import time
+import random
 from modules.visuales import *
 from modules.utilidades import guardar_puntaje
-import random
-import time
 
 class Juego:
-    def __init__(self, preguntas: list, menu_select: pygame.mixer.Sound, pickup_coin: pygame.mixer.Sound, game_over: pygame.mixer.Sound) -> None:
+    def __init__(self, preguntas: list, menu_select: pygame.mixer.Sound, 
+                 pickup_coin: pygame.mixer.Sound, game_over: pygame.mixer.Sound) -> None:
         """
         Inicializa una instancia de Juego con las preguntas y sonidos necesarios.
 
@@ -19,14 +20,16 @@ class Juego:
             "nombre": False,
             "preguntas": False,
             "siguiente": False,
-            "reiniciar": False
+            "reiniciar": False,
         }
 
-        self.preguntas = preguntas
+        self.nombre = ""
         self.puntaje = 0
         self.pregunta_actual = 0
+        self.preguntas = preguntas
+        self.half_activo = False
+        self.nombres_jugadores = set()
         self.comodines = {"Next": 1, "Half": 1, "Reload": 1}
-        self.nombre = ""
 
         self.tiempo_inicio = 0
         self.tiempo_maximo = 15
@@ -37,11 +40,12 @@ class Juego:
         self.cantidad_opcion_dos = 0
         self.respuesta_correcta = ""
 
+        self.game_over = game_over
         self.menu_select = menu_select
         self.pickup_coin = pickup_coin
-        self.game_over = game_over
 
-    def dibujar_pantallas(self, pantalla: pygame.Surface, fuente: pygame.font.Font) -> None:
+    def dibujar_pantallas(self, pantalla: pygame.Surface, 
+                          fuente: pygame.font.Font) -> None:
         """
         Dibuja la pantalla actual del juego según el estado actual.
 
@@ -59,7 +63,10 @@ class Juego:
             if self.tiempo_restante <= 0:
                 self.cambiar_pantalla("preguntas", "reiniciar")
             dibujar_cuadro(pantalla, fuente, self.preguntas[self.pregunta_actual])
-            dibujar_votantes(pantalla)
+            if self.half_activo:
+                pintar_dos_votantes(pantalla, self.votantes)
+            else:
+                dibujar_votantes(pantalla)
             dibujar_tiempo(pantalla, fuente, self.tiempo_restante)
             dibujar_comodines(pantalla, fuente, self.comodines)
             dibujar_puntaje(pantalla, fuente, self.puntaje)
@@ -93,21 +100,24 @@ class Juego:
                 self.menu_select.play()
                 self.cambiar_pantalla("inicio", "nombre")
         elif self.estados["nombre"] and self.nombre:
-            if x >= 318 and x <= 520 and y >= 487 and y <= 565:
-                self.menu_select.play()
-                self.tiempo_inicio = time.time()
-                self.cambiar_pantalla("nombre", "preguntas")
-                self.generar_votos_aleatorios()
-                self.contar_votos()
-                self.determinar_respuesta_correcta()
+            if self.nombre not in self.nombres_jugadores:
+                if x >= 318 and x <= 520 and y >= 487 and y <= 565:
+                    self.generar_votos_aleatorios()
+                    self.contar_votos()
+                    self.determinar_respuesta_correcta()
+                    self.menu_select.play()
+                    self.tiempo_inicio = time.time()
+                    self.nombres_jugadores.add(self.nombre)
+                    self.cambiar_pantalla("nombre", "preguntas")
         elif self.estados["preguntas"]:
             self.eventos_preguntas(x, y)
         elif self.estados["siguiente"]:
             if x >= 318 and x <= 520 and y >= 487 and y <= 565:
-                self.menu_select.play()
                 self.generar_votos_aleatorios()
                 self.contar_votos()
                 self.determinar_respuesta_correcta()
+                self.menu_select.play()
+                self.half_activo = False
                 self.tiempo_inicio = time.time()
                 self.cambiar_pantalla("siguiente", "preguntas")
         elif self.estados["reiniciar"]:
@@ -116,6 +126,7 @@ class Juego:
                 guardar_puntaje("data/puntajes.csv", self.nombre, self.puntaje)
                 self.nombre = ""
                 self.puntaje = 0
+                self.half_activo = False
                 self.pregunta_actual = 0
                 self.tiempo_inicio = time.time()
                 for comodin in self.comodines.keys():
@@ -131,7 +142,8 @@ class Juego:
             y (int): Coordenada y del clic del jugador.
 
         Returns:
-            str | None: Devuelve "Rojo" si se selecciona la opción roja, "Azul" si se selecciona la opción azul, None si no se selecciona ninguna opción.
+            str | None: Devuelve "Rojo" si se selecciona la opción roja, 
+            "Azul" si se selecciona la opción azul, None si no se selecciona ninguna opción.
         """
         if 190 <= x <= 380 and 225 <= y <= 320:
             jugador_eleccion = "Rojo"
@@ -150,7 +162,8 @@ class Juego:
             y (int): Coordenada y del clic del jugador.
 
         Returns:
-            str | None: Devuelve el nombre del comodín seleccionado ("Next", "Half", "Reload") o None si no se selecciona ningún comodín.
+            str | None: Devuelve el nombre del comodín seleccionado 
+            ("Next", "Half", "Reload") o None si no se selecciona ningún comodín.
         """
         if x >= 190 and x <= 250 and y >= 345 and y <= 405:
             comodin_eleccion = "Next"
@@ -223,6 +236,6 @@ class Juego:
                     self.pregunta_actual += 1
                     self.cambiar_pantalla("preguntas", "siguiente")
                 elif comodin == "Half":
-                    pass
+                    self.half_activo = True
                 elif comodin == "Reload":
                     self.pregunta_actual += 1

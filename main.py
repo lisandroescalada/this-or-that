@@ -12,11 +12,11 @@ fuente = pygame.font.Font("assets/fonts/VT323.ttf", 40)
 pygame.display.set_icon(logo)
 pygame.display.set_caption("¿Esto o Aquello?")
 
+preguntas = cargar_preguntas("data/preguntas.json")
 game_over = cargar_sonido("assets/sounds/Game_Over.wav", 0.1)
-soundtrack = cargar_sonido("assets/sounds/Soundtrack.mp3", 0.02)
+soundtrack = cargar_sonido("assets/sounds/Soundtrack.mp3", 0.2)
 pickup_coin = cargar_sonido("assets/sounds/Pickup_Coin.wav", 0.1)
-menu_select = cargar_sonido("assets/sounds/Menu_Select.wav", 0.01)
-preguntas = cargar_preguntas("Data\\preguntas.json")
+menu_select = cargar_sonido("assets/sounds/Menu_Select.wav", 0.1)
 
 juego = Juego(preguntas, menu_select, pickup_coin, game_over)
 
