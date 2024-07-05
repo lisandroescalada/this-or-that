@@ -68,4 +68,4 @@ Esto_o_Aquello/
      ![Pantalla de Fin del Juego](assets/images/final.png)
 
 # Gameplay:
-- [Video](...)
+- [Video](https://drive.google.com/file/d/1UsHy0HYQsjqG7wrdmFy7SP91k0Mbnuq8/view?usp=sharing)
