@@ -25,7 +25,7 @@ class Juego:
 
         self.nombre = ""
         self.puntaje = 0
-        self.pregunta_actual = 0
+        self.pregunta_actual = {}
         self.preguntas = preguntas
         self.half_activo = False
         self.nombres_jugadores = set()
@@ -43,6 +43,8 @@ class Juego:
         self.game_over = game_over
         self.menu_select = menu_select
         self.pickup_coin = pickup_coin
+
+        self.obtener_pregunta_aleatoria = lambda preguntas: random.choice(preguntas)
 
     def dibujar_pantallas(self, pantalla: pygame.Surface, 
                           fuente: pygame.font.Font) -> None:
@@ -62,7 +64,7 @@ class Juego:
             self.tiempo_restante = calcular_tiempo_restante(self.tiempo_inicio, self.tiempo_maximo)
             if self.tiempo_restante <= 0:
                 self.cambiar_pantalla("preguntas", "reiniciar")
-            dibujar_cuadro(pantalla, fuente, self.preguntas[self.pregunta_actual])
+            dibujar_cuadro(pantalla, fuente, self.pregunta_actual)
             if self.half_activo:
                 pintar_dos_votantes(pantalla, self.votantes)
             else:
@@ -108,6 +110,7 @@ class Juego:
                     self.menu_select.play()
                     self.tiempo_inicio = time.time()
                     self.nombres_jugadores.add(self.nombre)
+                    self.pregunta_actual = self.obtener_pregunta_aleatoria(self.preguntas)
                     self.cambiar_pantalla("nombre", "preguntas")
         elif self.estados["preguntas"]:
             self.eventos_preguntas(x, y)
@@ -127,7 +130,6 @@ class Juego:
                 self.nombre = ""
                 self.puntaje = 0
                 self.half_activo = False
-                self.pregunta_actual = 0
                 self.tiempo_inicio = time.time()
                 for comodin in self.comodines.keys():
                     self.comodines[comodin] = 1
@@ -220,7 +222,7 @@ class Juego:
             if eleccion == self.respuesta_correcta:
                 self.pickup_coin.play()
                 self.puntaje += 1
-                self.pregunta_actual += 1
+                self.pregunta_actual = self.obtener_pregunta_aleatoria(self.preguntas)
                 self.cambiar_pantalla("preguntas", "siguiente")
             else:
                 self.game_over.play()
@@ -233,9 +235,9 @@ class Juego:
                 self.comodines[comodin] = 0
                 if comodin == "Next":
                     self.puntaje += 1
-                    self.pregunta_actual += 1
+                    self.pregunta_actual = self.obtener_pregunta_aleatoria(self.preguntas)
                     self.cambiar_pantalla("preguntas", "siguiente")
                 elif comodin == "Half":
                     self.half_activo = True
                 elif comodin == "Reload":
-                    self.pregunta_actual += 1
+                    self.pregunta_actual = self.obtener_pregunta_aleatoria(self.preguntas)

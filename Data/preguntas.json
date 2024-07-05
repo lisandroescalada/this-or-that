@@ -1,5 +1,9 @@
 [
     {
+        "pregunta": "¿Prefieres viajar al...?",
+        "opciones": ["Pasado", "Futuro"]
+    },
+    {
         "pregunta": "¿Prefieres siempre tener...?",
         "opciones": ["Tos", "Hipo"]
     },
@@ -21,11 +25,11 @@
     },
     {
         "pregunta": "¿Prefieres tener una...?",
-        "opciones": ["Tarántula", "Serpiente"]
+        "opciones": ["Araña", "Vibora"]
     },
     {
         "pregunta": "¿Prefieres solo ver...?",
-        "opciones": ["Películas", "Series"]
+        "opciones": ["Pelís", "Series"]
     },
     {
         "pregunta": "¿Prefieres nunca...?",
@@ -33,10 +37,22 @@
     },
     {
         "pregunta": "¿Prefieres ser siempre...?",
-        "opciones": ["Temido", "Subestimado"]
+        "opciones": ["Temido", "Amado"]
     },
     {
         "pregunta": "¿Prefieres hablar con...?",
-        "opciones": ["Aliens", "Espíritus"]
+        "opciones": ["Aliens", "Visiones"]
+    },
+    {
+        "pregunta": "¿Prefieres nunca...?",
+        "opciones": ["Reír", "Llorar"]
+    },
+    {
+        "pregunta": "¿Prefieres solo comer...?",
+        "opciones": ["Dulce", "Salado"]
+    },
+    {
+        "pregunta": "¿Prefieres nunca poder...?",
+        "opciones": ["Hablar", "Escuchar"]
     }
 ]

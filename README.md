@@ -66,3 +66,6 @@ Esto_o_Aquello/
 5. Pantalla de Fin del Juego:
    - Cuando el juego termine, verás tu puntaje final y los votos. Puedes volver a la pantalla de inicio haciendo clic en "VOLVER".
      ![Pantalla de Fin del Juego](assets/images/final.png)
+
+# Gameplay:
+- [Video](...)
