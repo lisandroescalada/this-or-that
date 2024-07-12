@@ -1,5 +1,8 @@
 <h1 align="center">Esto_o_Aquello</h1>
 
+# Link del Repositorio
+- [GitHub](https://github.com/lisandroescalada/Esto_o_Aquello)
+
 # Descripción del Juego
 ¿Esto o Aquello? es un juego de preguntas y respuestas donde los jugadores deben elegir entre dos opciones. El objetivo es responder correctamente la mayor cantidad de preguntas posibles antes de que se acabe el tiempo.
 
