@@ -1,43 +1,26 @@
-<h1 align="center">Esto_o_Aquello</h1>
+# this_or_that
 
-# Link del Repositorio
+## Repository Link
+
 - [GitHub](https://github.com/lisandroescalada/Esto_o_Aquello)
 
-# Descripción del Juego
-¿Esto o Aquello? es un juego de preguntas y respuestas donde los jugadores deben elegir entre dos opciones. El objetivo es responder correctamente la mayor cantidad de preguntas posibles antes de que se acabe el tiempo.
+## Game Description
 
-## Estructura de Archivos:
-~~~ CSS
-Esto_o_Aquello/
+**This or That** is a fun question-and-answer game where players choose between two options. The goal is to answer as many questions correctly as possible before time runs out.
+
+## File Structure
+
+```text
+this_or_that/
 ├── assets/
 │   ├── fonts/
 │   │   └── VT323.ttf
 │   ├── images/
 │   │   ├── barra.png
 │   │   ├── boton_azul.png
-│   │   ├── boton_rojo.png
-│   │   ├── boton.png
-│   │   ├── cuadro.png
-│   │   ├── final.png
-│   │   ├── half.png
-│   │   ├── inicio.png
-│   │   ├── logo.png
-│   │   ├── mini_boton.png
-│   │   ├── moneda.png
-│   │   ├── next.png
-│   │   ├── nombre.png
-│   │   ├── preguntas.png
-│   │   ├── reload.png
-│   │   ├── resultados.png
-│   │   ├── titulo.png
-│   │   ├── voto_azul.png
-│   │   ├── voto_neutro.png
-│   │   └── voto_rojo.png
+│   │   └── ...
 │   ├── sounds/
-│   │   ├── Game_Over.wav
-│   │   ├── Menu_Select.wav
-│   │   ├── Pickup_Coin.wav
-│   │   └── Soundtrack.mp3
+│   │   └── ...
 ├── data/
 │   ├── preguntas.json
 │   └── puntajes.csv
@@ -46,29 +29,31 @@ Esto_o_Aquello/
 │   ├── utilidades.py
 │   └── visuales.py
 └── main.py
-~~~
+```
 
-# Instrucciones del Juego
-1. Pantalla de Inicio:
-   - Al iniciar el juego, se muestra la pantalla de inicio. Haz clic en el botón "INICIO" para comenzar.
-     ![Pantalla de Inicio](assets/images/inicio.png)
+## How to Play
 
-2. Ingresar Nombre:
-   - Ingresa tu nombre utilizando el teclado y presiona "SEGUIR" para continuar.
-     ![Ingresar Nombre](assets/images/nombre.png)
+1. **Start Screen**  
+   - When the game launches, the start screen appears. Click the **START** button to begin.  
+     ![Start Screen](assets/images/inicio.png)
 
-3. Pantalla de Preguntas:
-   - Se te presentará una pregunta con dos opciones. Haz clic en la opción que creas correcta.
-   - Puedes usar comodines "Next", "Half" y "Reload" para ayudarte a responder.
-     ![Pantalla de Preguntas](assets/images/preguntas.png)
+2. **Enter Your Name**  
+   - Type your name using the keyboard and click **CONTINUE** to proceed.  
+     ![Enter Name](assets/images/nombre.png)
 
-4. Pantalla de Resultado:
-   - Después de responder una pregunta, verás si tu respuesta fue correcta o no. Haz clic en "SEGUIR" para la próxima pregunta.
-     ![Pantalla de Resultado](assets/images/resultado.png)
+3. **Question Screen**  
+   - You will be presented with a question and two options. Click the one you think is correct.  
+   - Use the **Next**, **Half**, and **Reload** lifelines to help answer questions.  
+     ![Question Screen](assets/images/preguntas.png)
 
-5. Pantalla de Fin del Juego:
-   - Cuando el juego termine, verás tu puntaje final y los votos. Puedes volver a la pantalla de inicio haciendo clic en "VOLVER".
-     ![Pantalla de Fin del Juego](assets/images/final.png)
+4. **Result Screen**  
+   - After answering, you will see whether your answer was correct. Click **CONTINUE** to move to the next question.  
+     ![Result Screen](assets/images/resultado.png)
 
-# Gameplay:
-- [Video](https://drive.google.com/file/d/1mrWutDFRWOYNK48XMKaAAuDFva95momC/view?usp=sharing)
+5. **Game Over Screen**  
+   - When the game ends, your final score and votes are displayed. Click **BACK** to return to the start screen.  
+     ![Game Over Screen](assets/images/final.png)
+
+## Gameplay Video
+
+- [Watch Here](https://drive.google.com/file/d/1mrWutDFRWOYNK48XMKaAAuDFva95momC/view?usp=sharing)
